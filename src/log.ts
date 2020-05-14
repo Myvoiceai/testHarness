@@ -3,16 +3,18 @@ const llog = (a:string) => {
     fs.appendFileSync('log.csv', a+'\n');
 }
 fs.writeFileSync('log.csv', '');
-llog('No,Should succed,Score,SNR,SpeechTime,Registration,Test,Id,SizeReg,SizeTest')
+llog('No,Should succed,Score,SNR-Reg,SpeechTime-Reg,Registration,SNR-Tst,SpeechTime-Test,Id,SizeReg,SizeTest')
 let no = 0
 
 export interface Line {
-    shouldSucced: boolean;
+    shouldSucceed: boolean;
     score: number;
     registration: string;
     test: string;
-    snr: number;
-    speechTime: number;
+    snrReg: number;
+    speechTimeReg: number;
+    snrTst: number;
+    speechTimeTst: number;
     id: string;
     size_reg: number;
     size_test: number;
@@ -25,11 +27,13 @@ export function log(a: string) {
 export function logLine(a: Line) {
     no++
     const str = no + ', ' +
-        a.shouldSucced + ', ' +
+        a.shouldSucceed + ', ' +
         a.score + ', ' +
-        a.snr + ', ' +
-        a.speechTime + ', ' +
+        a.snrReg + ', ' +
+        a.speechTimeReg + ', ' +
         a.registration + ', ' +
+        a.snrTst + ', ' +
+        a.speechTimeTst + ', ' +
         a.test + ', ' +
         a.id + ', ' +
         a.size_reg + ', ' +

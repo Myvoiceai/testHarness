@@ -34,13 +34,15 @@ async function main() {
                     if(s_reg.id == s_test.id) {
                         continue
                     }
-                    let result = await verify(s_reg.id, s_test.path)
+                    let result = await verify(s_reg.id, s_test.path);
                     logLine({
-                        shouldSucced: ind_reg == ind_test,
+                        shouldSucceed: ind_reg == ind_test,
                         score: result.score,
-                        snr: s_reg.snr,
-                        speechTime: s_reg.speechTime,
+                        snrReg: s_reg.snr,
+                        speechTimeReg: s_reg.speechTime,
                         registration: s_reg.path,
+                        snrTst: result.snr,
+                        speechTimeTst: result.speechTime,
                         test: s_test.path,
                         id: s_reg.id,
                         size_reg: s_reg.size,

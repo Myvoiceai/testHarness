@@ -3,7 +3,7 @@ import { soxStream } from "./sox";
 const fs = require('fs');
 const request = require("request-promise")
 
-const url = 'https://biocore.myvoice.ai';
+const url = 'https://core.myvoice.ai';
 const token = 'gigaaa';
 
 export interface RegisterResponse {
@@ -13,6 +13,8 @@ export interface RegisterResponse {
 }
 
 export interface VerifyResponse {
+    snr: number;
+    speechTime: number;
     score: number,
 }
 
@@ -57,6 +59,8 @@ export async function verify(id: string, path: string): Promise<VerifyResponse> 
         r = JSON.parse(r);
         return {
             score: r.score,
+            snr: r.quality.files[0].score,
+            speechTime: r.quality.files[0].speech_time,
         }
     })
 }

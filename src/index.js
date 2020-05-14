@@ -10,7 +10,6 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const saples_1 = require("./saples");
-// import { register, verify } from "./deepaffects";
 const myvoice_1 = require("./myvoice");
 const log_1 = require("./log");
 function main() {
@@ -63,7 +62,7 @@ main();
 function registerAll(ind) {
     return __awaiter(this, void 0, void 0, function* () {
         // Register the same individual with all the different samples - important
-        // so that we get the variation in registrationalso and not only verification
+        // so that we get the variation in registration also and not only verification
         for (const it of ind.samples) {
             log_1.log('# registering ' + it.path + ' as ' + it.id);
             const resp = yield myvoice_1.register(it.id, it.path);

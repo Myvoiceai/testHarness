@@ -12,12 +12,8 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const sox_1 = require("./sox");
 const fs = require('fs');
 const request = require("request-promise");
-// const url = 'http://devtest.myvoice.ai';
-// const token = 'RE5CVGVsZTo2UXYwbE9oNFd6N01i';
-// const url = 'http://localhost:3000';
-const url = 'https://client-testing.myvoice.ai';
-// const url = 'http://ec2-18-130-139-189.eu-west-2.compute.amazonaws.com:3000';
-const token = 'myvoice';
+const url = 'https://core.myvoice.ai';
+const token = 'gigaaa';
 function register(id, path) {
     return __awaiter(this, void 0, void 0, function* () {
         const [stream, size] = yield sox_1.soxStream(path, id);
