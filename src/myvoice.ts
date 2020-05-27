@@ -1,10 +1,12 @@
 import { soxStream } from "./sox";
 
 const fs = require('fs');
-const request = require("request-promise")
+const request = require("request-promise");
 
-const url = 'https://core.myvoice.ai';
+const url = 'https://client-testing.myvoice.ai';
 const token = 'gigaaa';
+const user = 'developer';
+let authToken = btoa(user + ":" + token);
 
 export interface RegisterResponse {
     snr: number,
@@ -19,13 +21,13 @@ export interface VerifyResponse {
 }
 
 export async function register(id: string, path: string): Promise<RegisterResponse> {
-    const [stream, size] = await soxStream(path, id)
+    const [stream, size] = await soxStream(path, id);
     const options = {
         method: "POST",
         url: url + `/speakerEnrol?speakerId=${id}`,
         headers: {
             "Content-Type": "multipart/form-data",
-            "Authorization": `Bearer ${token}`,
+            "Authorization": `Basic ${authToken}`,
         },
         formData: {
             "wav1": stream
@@ -49,7 +51,7 @@ export async function verify(id: string, path: string): Promise<VerifyResponse> 
         url: url + `/speakerVerify?speakerId=${id}`,
         headers: {
             "Content-Type": "multipart/form-data",
-            "Authorization": `Bearer ${token}`,
+            "Authorization": `Basic ${authToken}`,
         },
         formData: {
             "wav1": stream
