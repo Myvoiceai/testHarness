@@ -5,7 +5,7 @@ const llog = (a) => {
     fs.appendFileSync('log.csv', a + '\n');
 };
 fs.writeFileSync('log.csv', '');
-llog('No,Should succed,Score,SNR,SpeechTime,Registration,Test,Id,SizeReg,SizeTest');
+llog('No,Should succed,Score,SNR-Reg,SpeechTime-Reg,Registration,SNR-Tst,SpeechTime-Test,Id,SizeReg,SizeTest');
 let no = 0;
 function log(a) {
     console.log(a);
@@ -14,11 +14,13 @@ exports.log = log;
 function logLine(a) {
     no++;
     const str = no + ', ' +
-        a.shouldSucced + ', ' +
+        a.shouldSucceed + ', ' +
         a.score + ', ' +
-        a.snr + ', ' +
-        a.speechTime + ', ' +
+        a.snrReg + ', ' +
+        a.speechTimeReg + ', ' +
         a.registration + ', ' +
+        a.snrTst + ', ' +
+        a.speechTimeTst + ', ' +
         a.test + ', ' +
         a.id + ', ' +
         a.size_reg + ', ' +
