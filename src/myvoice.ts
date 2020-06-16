@@ -2,8 +2,9 @@ import { soxStream } from "./sox";
 
 const fs = require('fs');
 const request = require("request-promise");
-
-const url = 'https://developer:50827367-af1d-42bc-b5fb-9a8b0f1183ed@client-testing.myvoice.ai';
+const devToken = 'YOUR TOKEN GOES HERE';
+const serverUrl = 'YOUR SERVER URL GOES HERE'
+const url = 'https://developer:' + devToken + '@' + serverUrl;
 
 export interface RegisterResponse {
     snr: number,
@@ -24,7 +25,6 @@ export async function register(id: string, path: string): Promise<RegisterRespon
         url: url + `/speakerEnrol?speakerId=${id}`,
         headers: {
             "Content-Type": "multipart/form-data"
-            // "Authorization": `Basic ${token}`,
         },
         formData: {
             "wav1": stream
