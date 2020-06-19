@@ -21,5 +21,6 @@ tsc -b
 node node_modules/ts-node/dist/bin.js src/index.ts
 
 ## Results: 
-// Stored to log.csv
-//Copy file to results folder for history maintainance
+> Stored to log.csv
+
+> Copy file to results folder for history maintainance
