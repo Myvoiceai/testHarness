@@ -25,9 +25,6 @@ npm install
 ## Build
 tsc -b
 
-## Prepare (2)
-> Place wav files in a folder per speaker under the data/ folder
-
 ## Run
 node node_modules/ts-node/dist/bin.js src/index.ts
 
