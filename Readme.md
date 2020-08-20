@@ -11,6 +11,17 @@ npm install
 
 > Add your server URL details at line 6 of myVoice.ts
 
+## Prepare (2)
+> Each speaker should have their audio files in a folder under project root/data/{speaker}
+
+> Each audio file should be in 16Bit, Mono, PCM WAV format
+
+> Each file should be uniquely named 
+
+> For Digits recordings prefix each filename with DI-
+
+> For other recordings prefix with FS-
+
 ## Build
 tsc -b
 
