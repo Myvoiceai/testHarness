@@ -18,6 +18,7 @@ export interface Sample {
 }
 
 export interface Individual {
+    speakerId: string,
     samples: Sample[];
     name: string;
     id: string;
@@ -49,6 +50,7 @@ async function getIndividual(pth: string, name: string): Promise<Individual> {
         samples.push(await getSample(id, path.join(pth, p)))
     }
     return {
+        speakerId: '',
         name: pth,
         samples: samples,
         id: id,

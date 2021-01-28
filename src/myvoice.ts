@@ -1,12 +1,13 @@
 import { soxStream } from "./sox";
+import {log} from "./log";
 
 const fs = require('fs');
 const request = require("request-promise");
-const devToken = 'YOUR TOKEN GOES HERE';
-const serverUrl = 'YOUR SERVER URL GOES HERE'
-const url = 'https://developer:' + devToken + '@' + serverUrl;
+const devToken = '53810a21-7fee-4373-80ac-ca61a9766f82';
+const url = 'https://prd.mve.digital/api/v1';
 
 export interface RegisterResponse {
+    speakerId: string;
     snr: number,
     speechTime: number,
     fileSize: number,
@@ -22,9 +23,10 @@ export async function register(id: string, path: string): Promise<RegisterRespon
     const [stream, size] = await soxStream(path, id);
     const options = {
         method: "POST",
-        url: url + `/speakerEnrol?speakerId=${id}`,
+        url: url + `/speakers/`,
         headers: {
-            "Content-Type": "multipart/form-data"
+            "Content-Type": "multipart/form-data",
+            "Api-key": devToken
         },
         formData: {
             "wav1": stream
@@ -32,9 +34,11 @@ export async function register(id: string, path: string): Promise<RegisterRespon
     };
     return request(options).then((r:any) => {
         r = JSON.parse(r);
+        log("SPEAKER ID IS " + r.id);
         return {
-            snr: r.quality.files[0].snr,
-            speechTime: r.quality.files[0].speech_time,
+            speakerId: r.id,
+            snr: r.files[0].snr,
+            speechTime: r.files[0].speechDuration,
             fileSize: size,
         }
     });
@@ -47,7 +51,8 @@ export async function verify(id: string, path: string): Promise<VerifyResponse> 
         method: "POST",
         url: url + `/speakerVerify?speakerId=${id}`,
         headers: {
-            "Content-Type": "multipart/form-data"
+            "Content-Type": "multipart/form-data",
+            "Api-token": devToken
         },
         formData: {
             "wav1": stream

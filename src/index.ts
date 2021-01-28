@@ -13,6 +13,7 @@ async function main() {
     // Register them all
     for (const ind of individuals) {
         await registerAll(ind)
+        log("RETURNED ID for " + ind.name + " is " + ind.speakerId);
     }
     log('')
 
@@ -23,9 +24,9 @@ async function main() {
             list.push([ind_test, s_test])
         }
     }
-
+/*
     // Run each of the samples towards each of the registered id's
-    // and constantly lok our performance/result
+    // and constantly log our performance/result
     for (const ind_reg of individuals) {
         for (const s_reg of ind_reg.samples) {
             for (const ind_test of individuals) {
@@ -52,6 +53,8 @@ async function main() {
             }
         }
     }
+
+ */
 }
 
 main();
@@ -62,6 +65,7 @@ async function registerAll(ind: Individual): Promise<any> {
     for (const it of ind.samples) {
         log('# registering ' + it.path + ' as ' + it.id);
         const resp = await register(it.id, it.path);
+        ind.speakerId = resp.speakerId;
         it.snr = resp.snr;
         it.speechTime = resp.speechTime;
         it.size = resp.fileSize
