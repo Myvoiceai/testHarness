@@ -44,7 +44,8 @@ export async function register(id: string, path: string): Promise<RegisterRespon
     });
 }
 
-
+// this is now https://prd.mve.digital/api/v1/speakers/{SPEAKERID}}/sessions
+// we need to pass the speakerID retrieved during enrol and stored against the new enrol record
 export async function verify(id: string, path: string): Promise<VerifyResponse>  {
     const [stream, size] = await soxStream(path, id)
     const options = {
