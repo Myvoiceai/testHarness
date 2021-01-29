@@ -9,6 +9,7 @@ const { readdir, stat } = require("fs").promises
 const noice = Math.ceil(Math.random()*1e6);
 
 export interface Sample {
+    speakerId: string;
     path: string;
     name: string;
     id: string;
@@ -18,7 +19,6 @@ export interface Sample {
 }
 
 export interface Individual {
-    speakerId: string,
     samples: Sample[];
     name: string;
     id: string;
@@ -50,7 +50,6 @@ async function getIndividual(pth: string, name: string): Promise<Individual> {
         samples.push(await getSample(id, path.join(pth, p)))
     }
     return {
-        speakerId: '',
         name: pth,
         samples: samples,
         id: id,
@@ -62,6 +61,7 @@ async function getSample(id: string, pth: string): Promise<Sample> {
     name = name[name.length-1]
     name = name.replace('.','_')
     return {
+        speakerId: "",
         path: pth,
         name: name,
         id: id+'_'+name,
