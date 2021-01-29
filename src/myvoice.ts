@@ -50,10 +50,10 @@ export async function verify(id: string, path: string): Promise<VerifyResponse> 
     const [stream, size] = await soxStream(path, id)
     const options = {
         method: "POST",
-        url: url + `/speakerVerify?speakerId=${id}`,
+        url: url + `/speakers/' + ${id} + '/sessions`,
         headers: {
             "Content-Type": "multipart/form-data",
-            "Api-token": devToken
+            "Api-key": devToken
         },
         formData: {
             "wav1": stream
@@ -62,9 +62,9 @@ export async function verify(id: string, path: string): Promise<VerifyResponse> 
     return request(options).then((r:any) => {
         r = JSON.parse(r);
         return {
-            score: r.score,
-            snr: r.quality.files[0].snr,
-            speechTime: r.quality.files[0].speech_time,
+            score: r.verifications.result.raw,
+            snr: r.verifications.files[0].snr,
+            speechTime: r.verifications.files[0].speechDuration,
         }
     })
 }

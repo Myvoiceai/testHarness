@@ -37,20 +37,20 @@ async function main() {
                         continue
                     }
                     log("VERIFY " + s_reg.speakerId + " enrol file "  + s_reg.id + " against sample " + s_test.id);
-                    // let result = await verify(s_reg.id, s_test.path);
-                    // logLine({
-                    //     shouldSucceed: ind_reg == ind_test,
-                    //     score: result.score,
-                    //     snrReg: s_reg.snr,
-                    //     speechTimeReg: s_reg.speechTime,
-                    //     registration: s_reg.path,
-                    //     snrTst: result.snr,
-                    //     speechTimeTst: result.speechTime,
-                    //     test: s_test.path,
-                    //     id: s_reg.id,
-                    //     size_reg: s_reg.size,
-                    //     size_test: s_test.size,
-                    // })
+                    let result = await verify(s_reg.speakerId, s_test.path);
+                    logLine({
+                        shouldSucceed: ind_reg == ind_test,
+                        score: result.score,
+                        snrReg: s_reg.snr,
+                        speechTimeReg: s_reg.speechTime,
+                        registration: s_reg.path,
+                        snrTst: result.snr,
+                        speechTimeTst: result.speechTime,
+                        test: s_test.path,
+                        id: s_reg.id,
+                        size_reg: s_reg.size,
+                        size_test: s_test.size,
+                    })
                 }
             }
         }
