@@ -32,11 +32,11 @@ async function main() {
             for (const ind_test of individuals) {
                 for (const s_test of ind_test.samples) {
                     // Skip the test if it is the same one used for registration
-                    if(s_reg.id == s_test.id) {
-                        log("don't verify " + s_reg.id);
+                    if(s_reg.speakerId == s_test.speakerId) {
+                        log("don't verify " + s_reg.speakerId + " against " + s_test.speakerId);
                         continue
                     }
-                    log("VERIFY " + s_reg.id + " " + s_test.id);
+                    log("VERIFY " + s_reg.speakerId + " enrol file "  + s_reg.id + " against sample " + s_test.id);
                     // let result = await verify(s_reg.id, s_test.path);
                     // logLine({
                     //     shouldSucceed: ind_reg == ind_test,
