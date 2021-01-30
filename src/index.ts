@@ -4,7 +4,6 @@ import { log, logLine } from "./log";
 
 
 async function main() {
-
     // Get all the individuals we should use
     let [individuals, tally] = await getData('data/');
     log('# Using ' + tally + ' files')
@@ -20,7 +19,6 @@ async function main() {
     const list = new Array<[Individual, Sample]>()
     for (const ind_test of individuals) {
         for (const s_test of ind_test.samples) {
-            log("SPEAKER DETAIL " + ind_test.name + " - " + s_test.speakerId);
             list.push([ind_test, s_test])
         }
     }
@@ -33,10 +31,9 @@ async function main() {
                 for (const s_test of ind_test.samples) {
                     // Skip the test if it is the same one used for registration
                     if(s_reg.speakerId == s_test.speakerId) {
-                        log("don't verify " + s_reg.speakerId + " against " + s_test.speakerId);
                         continue
                     }
-                    log("VERIFY " + s_reg.speakerId + " enrol file "  + s_reg.id + " against sample " + s_test.id);
+
                     let result = await verify(s_reg.speakerId, s_test.path);
                     logLine({
                         shouldSucceed: ind_reg == ind_test,
